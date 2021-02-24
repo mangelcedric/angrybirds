@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }}Home Page{% endblock %}
+
+{% block body %}
+
+<h1>A Field Guide to Angry Birds</h1>
+
+<h2>Games that lodge in the brain often have comical stars </h2>
+
+{% if app.session.get('lastBird') is not null %}
+{% set birdId = app.session.get('lastBird') %}
+<p>
+    Dernier oiseau vu : <a href="{{ path('bird_single', {'id': birdId}) }}">{{ birds[birdId].name }}</a>
+</p>
+{% endif %}
+
+<p>
+    Download : <a href="{{ path('bird_calendar') }}">calendar.pdf</a>
+</p>
+
+<div class="row">
+    {% for index, bird in birds %}
+        <div class="col-4">
+            <div class="card bg-{{ cycle(['primary', 'info', 'warning', 'dark'], loop.index) }} mb-3">
+                <div class="card-body text-center">
+                    <p class="card-text"><a href="{{ path('bird_single', {id: index})  }}"><img src="{{ asset('images/' ~ bird.image) }}" alt="{{ bird.name }}"></a></p>
+                    <h4 class="card-title"><a href="{{ path('bird_single', {id: index}) }}" class="btn btn-{{ cycle(['primary', 'info', 'warning', 'secondary'], loop.index) }}">{{ bird.name }}</a></h4>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
+

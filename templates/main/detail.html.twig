@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }}{{ bird.name }}{% endblock %}
+
+{% block body %}
+    <h1>{{ bird.name }}</h1>
+        <div class="col-4">         
+            <div class="card border-primary mb-3">
+                <div class="card-body text-center">
+                    <p class="card-text"><img src="{{ asset('images/' ~ bird.image) }}" alt="{{ bird.name }}"></a></p>
+                </div> 
+            </div>          
+        </div>
+        <p>{{ bird.description }}</p>
+        <hr>
+            <a href="{{ path('bird_list') }}" class="btn btn-primary">Retour à la liste</a>
+        </hr>
+{% endblock %}
